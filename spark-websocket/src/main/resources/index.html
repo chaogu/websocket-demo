@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+
+</body>
+
+<script>
+var ws = new WebSocket("ws://localhost:4567/echo");
+
+ws.onopen = function(evt) { 
+  console.log("Connection open ..."); 
+  //ws.send("Hello WebSockets!");
+};
+
+ws.onmessage = function(evt) {
+  console.log( "Received Message: " + evt.data);
+};
+
+ws.onclose = function(evt) {
+  console.log("Connection closed.");
+};      
+
+</script>
+</html>
