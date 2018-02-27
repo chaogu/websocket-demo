@@ -10,10 +10,17 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 
+/**
+ * websocket service
+ *
+ * @author zhichao
+ */
 @WebSocket
 public class EchoWebSocket {
-	// Store sessions
-	private Queue<Session> sessions = new ConcurrentLinkedQueue<>();
+	/**
+	 * Store sessions
+	 */
+	private Queue<Session> sessions = new ConcurrentLinkedQueue<Session>();
 
 	@OnWebSocketConnect
 	public void connected(Session session) {
@@ -32,11 +39,11 @@ public class EchoWebSocket {
 	@OnWebSocketMessage
 	public void message(Session session, String message) throws IOException {
 		System.out.println(session);
-		System.out.println("Got: " + message); // Print message
-		session.getRemote().sendString(message); // and send it back
+		System.out.println("Got: " + message);
+		session.getRemote().sendString(message);
 	}
 
-	public void brocast() throws IOException {
+	public void broadcast() throws IOException {
 		for (Session session : sessions) {
 			session.getRemote().sendString("666");
 		}
